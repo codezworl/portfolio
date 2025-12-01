@@ -1664,7 +1664,26 @@ html {
     }
 
     .resume-download-btn-container {
-        left: 10px;
         top: 10px;
+        left: 10px;
+    }
+
+    .page-hint {
+        font-size: 0.8rem;
+    }
+
+    /* Mobile button spacing */
+    #previewResumeBtn {
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto 1rem auto !important;
+    }
+
+    .download-cv {
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto !important;
     }
 }
