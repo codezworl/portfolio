@@ -808,12 +808,22 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add click handlers to pages for navigation
     if (leftPageContent) {
         leftPageContent.parentElement.addEventListener('click', function (e) {
-            // Click on left page = go to previous
-            if (currentPage > 0) {
-                currentPage -= isMobile ? 1 : 2;
-                if (currentPage < 0) currentPage = 0;
-                renderPages();
-                updateControls();
+            if (isMobile) {
+                // On mobile, clicking the single page goes to next
+                const maxPage = resumePages.length - 1;
+                if (currentPage < maxPage) {
+                    currentPage += 1;
+                    renderPages();
+                    updateControls();
+                }
+            } else {
+                // On desktop, click on left page = go to previous
+                if (currentPage > 0) {
+                    currentPage -= 2;
+                    if (currentPage < 0) currentPage = 0;
+                    renderPages();
+                    updateControls();
+                }
             }
         });
         leftPageContent.parentElement.style.cursor = 'pointer';
@@ -821,10 +831,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (rightPageContent) {
         rightPageContent.parentElement.addEventListener('click', function (e) {
-            // Click on right page = go to next
-            const maxPage = isMobile ? resumePages.length - 1 : resumePages.length - 2;
+            // Click on right page = go to next (desktop only)
+            const maxPage = resumePages.length - 2;
             if (currentPage < maxPage) {
-                currentPage += isMobile ? 1 : 2;
+                currentPage += 2;
                 renderPages();
                 updateControls();
             }
