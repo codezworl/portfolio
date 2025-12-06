@@ -808,22 +808,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add click handlers to pages for navigation
     if (leftPageContent) {
         leftPageContent.parentElement.addEventListener('click', function (e) {
-            if (isMobile) {
-                // On mobile, clicking the single page goes to next
-                const maxPage = resumePages.length - 1;
-                if (currentPage < maxPage) {
-                    currentPage += 1;
-                    renderPages();
-                    updateControls();
-                }
-            } else {
-                // On desktop, click on left page = go to previous
-                if (currentPage > 0) {
-                    currentPage -= 2;
-                    if (currentPage < 0) currentPage = 0;
-                    renderPages();
-                    updateControls();
-                }
+            // Click on left page = go to previous
+            if (currentPage > 0) {
+                currentPage -= isMobile ? 1 : 2;
+                if (currentPage < 0) currentPage = 0;
+                renderPages();
+                updateControls();
             }
         });
         leftPageContent.parentElement.style.cursor = 'pointer';
@@ -831,10 +821,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (rightPageContent) {
         rightPageContent.parentElement.addEventListener('click', function (e) {
-            // Click on right page = go to next (desktop only)
-            const maxPage = resumePages.length - 2;
+            // Click on right page = go to next
+            const maxPage = isMobile ? resumePages.length - 1 : resumePages.length - 2;
             if (currentPage < maxPage) {
-                currentPage += 2;
+                currentPage += isMobile ? 1 : 2;
                 renderPages();
                 updateControls();
             }
@@ -860,4 +850,29 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+
+    // ========== VIDEO AUTOPLAY ON SCROLL ==========
+    const autoplayVideo = document.getElementById('autoplay-video');
+
+    if (autoplayVideo) {
+        // Create Intersection Observer for video autoplay
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Video is in viewport, play it
+                    autoplayVideo.play().catch(error => {
+                        console.log('Video autoplay failed:', error);
+                    });
+                } else {
+                    // Video is out of viewport, pause it
+                    autoplayVideo.pause();
+                }
+            });
+        }, {
+            threshold: 0.5 // Video will play when 50% visible
+        });
+
+        // Start observing the video element
+        videoObserver.observe(autoplayVideo);
+    }
 });
