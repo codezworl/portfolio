@@ -303,10 +303,62 @@ h6 {
     margin-top: 2rem;
 }
 
+.about-image {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.neon-border {
+    border: 3px solid var(--primary-color);
+    border-radius: 20px;
+    box-shadow: 0 0 30px var(--primary-glow),
+        inset 0 0 20px rgba(99, 102, 241, 0.1);
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.neon-border:hover {
+    box-shadow: 0 0 50px var(--primary-glow),
+        inset 0 0 30px rgba(99, 102, 241, 0.2);
+}
+
+.about-img-custom {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.about-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    min-height: 400px;
+}
+
 .about-text p {
     font-size: 1.1rem;
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
+}
+
+/* Video Section */
+.video-section {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.portfolio-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 600px;
 }
 
 .skills-grid {
@@ -565,8 +617,21 @@ h6 {
 }
 
 /* Portfolio Section */
+.portfolio-grid .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.portfolio-grid .col-lg-6 {
+    display: flex;
+    flex-direction: column;
+}
+
 .portfolio-item {
     margin-bottom: 3rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .portfolio-content {
@@ -579,6 +644,8 @@ h6 {
     padding: 2rem;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+    min-height: 280px;
+    height: 100%;
 }
 
 .portfolio-content:hover {
@@ -1664,26 +1731,7 @@ html {
     }
 
     .resume-download-btn-container {
-        top: 10px;
         left: 10px;
-    }
-
-    .page-hint {
-        font-size: 0.8rem;
-    }
-
-    /* Mobile button spacing */
-    #previewResumeBtn {
-        display: block;
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto 1rem auto !important;
-    }
-
-    .download-cv {
-        display: block;
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto !important;
+        top: 10px;
     }
 }
